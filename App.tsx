@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.tsx
+import React from 'react';
+import 'react-native-gesture-handler';  // Asegúrate de importar esto primero
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+// Contexto de autenticación
+import { AuthProvider, useAuth } from './src/context/AuthContext';
+import AuthStack from './src/navigation/AuthStack';   // Stack para Login
+import AppDrawer from './src/navigation/AppDrawer';   // el drawer
+
+// Pantallas
+import LoginScreen from './src/screens/LoginScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import CalendarScreen from './src/screens/CalendarScreen';
+
+// Provider de React Native Paper
+import { Provider as PaperProvider } from 'react-native-paper';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <AuthProvider>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </AuthProvider>
+    </PaperProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function RootNavigator() {
+  const { user } = useAuth();
+  return user ? <AppDrawer /> : <AuthStack />;
+}

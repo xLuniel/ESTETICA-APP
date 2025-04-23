@@ -1,3 +1,5 @@
+import "./global.css";        // si usas NativeWind
+
 import { registerRootComponent } from 'expo';
 
 import App from './App';
