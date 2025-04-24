@@ -11,6 +11,7 @@ import ClientesScreen from '../screens/ClientesScreen';                     // a
 import ServiciosScreen from '../screens/ServiciosScreen';                   // todos
 import RequestAppointmentScreen from '../screens/PedirCitaScreen';          // todos usuarios
 import PanelAdminScreen from '../screens/PanelAdminScreen';                 // solo admin
+import Prueba from '../screens/Prueba';                                     // solo admin
 
 const Drawer = createDrawerNavigator();
 
@@ -71,12 +72,19 @@ export default function AppDrawer() {
 
       {/* Solo Admin ve Panel Administrativo */}
       {user?.role === 'admin' && (
+      <>
         <Drawer.Screen
           name="PanelAdministrativo"
           component={PanelAdminScreen}
           options={{ title: 'Panel Administrativo' }}
         />
-      )}
+        <Drawer.Screen
+          name="Prueba"
+          component={Prueba}
+          options={{ title: 'Prueba' }}
+        />
+      </>
+    )}
     </Drawer.Navigator>
   );
 }
