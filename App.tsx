@@ -14,6 +14,7 @@ import AppDrawer from './src/navigation/AppDrawer';   // el drawer
 import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import CalendarScreen from './src/screens/CalendarScreen';
+import Recuperar from './src/screens/Recuperar';
 
 // Provider de React Native Paper
 import { Provider as PaperProvider } from 'react-native-paper';

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useAuth } from '../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 type Role = 'admin' | 'recepcionista' | 'esteticista' | 'usuario'; 
 
@@ -13,10 +14,12 @@ const TEST_USERS: Record<string, { password: string; role: Role }> = {
   'us4@estetica.com': { password: 'Usuario123',     role: 'usuario' },
 };
 
+
 export default function LoginScreen() {
   const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     // Validación de campos
@@ -75,6 +78,9 @@ export default function LoginScreen() {
         <Text>Esteticista: es3@estetica.com / Estetica123</Text>
         <Text>Usuario: us4@estetica.com / Usuario123</Text>
       </View>
+      <View style={styles.footer}>
+        <Text style={styles.bluext} onPress={() => navigation.navigate('Recuperar')}>¿Olvidaste tu contraseña?</Text>
+      </View>
     </View>
   );
 }
@@ -96,5 +102,9 @@ const styles = StyleSheet.create({
   },
   footerTitle: {
     fontWeight: '600', marginBottom: 5, color: '#555'
+  },
+  bluext: {
+    color: 'blue',
+    textDecorationLine: 'underline'
   }
 });
