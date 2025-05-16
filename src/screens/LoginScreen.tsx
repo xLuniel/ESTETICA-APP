@@ -1,100 +1,50 @@
 // src/screens/LoginScreen.tsx
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { useAuth } from '../context/AuthContext';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { useAuth } from 'src/context/AuthContext';
 
-type Role = 'admin' | 'recepcionista' | 'esteticista' | 'usuario'; 
-
-// Definimos las 4 cuentas de prueba
-const TEST_USERS: Record<string, { password: string; role: Role }> = {
-  'ad1@estetica.com': { password: 'Admin123',       role: 'admin' },
-  're2@estetica.com': { password: 'Recep123',       role: 'recepcionista' },
-  'es3@estetica.com': { password: 'Estetica123',    role: 'esteticista' },
-  'us4@estetica.com': { password: 'Usuario123',     role: 'usuario' },
-};
-
-export default function LoginScreen() {
-  const { signIn } = useAuth();
+export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signIn } = useAuth();
 
-  const handleLogin = () => {
-    // Validación de campos
-    if (!email || !password) {
-      Alert.alert('Error', 'Por favor, ingresa correo y contraseña.');
-      return;
+  const handleLogin = async () => {
+    try {
+      await signIn(email, password);
+      // La redirección a la pantalla correspondiente ya la controla App.tsx
+    } catch (error) {
+      Alert.alert('Error', 'Correo o contraseña incorrecta');
+      console.error(error);
     }
-
-    // Buscamos el usuario en nuestro objeto de prueba
-    const record = TEST_USERS[email.toLowerCase()];
-    if (!record || record.password !== password) {
-      Alert.alert('Credenciales inválidas', 'Verifica tu correo y contraseña.');
-      return;
-    }
-
-    // Si coincide, hacemos signIn con nombre, correo y rol
-    signIn({
-      name: email.split('@')[0], 
-      email,
-      role: record.role,
-    });
-
-    // Limpiar campos (opcional)
-    setEmail('');
-    setPassword('');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Iniciar Sesión</Text>
+      <Text style={styles.title}>Brushes</Text>
+      <Image source={require('../../assets/img1.png')} style={styles.image} />
+      <Text style={styles.subtitle}>Inicio de Sesión</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Correo electrónico"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={email}
-        onChangeText={setEmail}
-      />
+      <TextInput placeholder="Correo" style={styles.input} onChangeText={setEmail} value={email} />
+      <TextInput placeholder="Contraseña" secureTextEntry style={styles.input} onChangeText={setPassword} value={password} />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+      </TouchableOpacity>
 
-      <Button title="Ingresar" onPress={handleLogin} />
-      
-      {/* Instrucciones de prueba */}
-      <View style={styles.footer}>
-        <Text style={styles.footerTitle}>Cuentas de prueba:</Text>
-        <Text>Admin: ad1@estetica.com / Admin123</Text>
-        <Text>Recep: re2@estetica.com / Recep123</Text>
-        <Text>Esteticista: es3@estetica.com / Estetica123</Text>
-        <Text>Usuario: us4@estetica.com / Usuario123</Text>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.link}>Crear cuenta</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#fff0f5'
-  },
-  title: {
-    fontSize: 24, marginBottom: 20, textAlign: 'center', color: '#d4af37'
-  },
-  input: {
-    height: 50, borderColor: '#d4af37', borderWidth: 1,
-    borderRadius: 8, marginBottom: 15, paddingHorizontal: 10,
-    backgroundColor: '#ffffff'
-  },
-  footer: {
-    marginTop: 30, padding: 10, borderTopWidth: 1, borderTopColor: '#ddd'
-  },
-  footerTitle: {
-    fontWeight: '600', marginBottom: 5, color: '#555'
-  }
+  container: { padding: 24, alignItems: 'center', backgroundColor: '#f5f9fc', flex: 1 },
+  title: { fontSize: 32, fontWeight: 'bold', marginTop: 40 },
+  subtitle: { fontSize: 18, marginVertical: 20 },
+  input: { width: '100%', padding: 12, marginVertical: 8, borderWidth: 1, borderRadius: 8 },
+  button: { backgroundColor: '#3a4b57', padding: 14, borderRadius: 8, width: '100%', marginTop: 12 },
+  buttonText: { color: 'white', textAlign: 'center' },
+  link: { color: '#3a4b57', marginTop: 16 },
+  image: { width: 120, height: 120, marginVertical: 20 }
 });
