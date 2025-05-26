@@ -35,7 +35,6 @@ export default function HomeScreen() {
     });
   }, [navigation, signOut, user]);
 
-  // Definimos todas las posibles opciones
   const allItems: Record<string, MenuItem> = {
     Agenda:    { label: 'Agenda',    screen: 'Agenda',             icon: 'calendar' },
     Clientes:  { label: 'Clientes',  screen: 'Clientes',           icon: 'account' },
@@ -45,7 +44,6 @@ export default function HomeScreen() {
     'Panel Admin': { label: 'Panel Admin', screen: 'PanelAdministrativo', icon: 'chart-bar' },
   };
 
-  // Filtramos según rol
   let menuKeys: string[] = [];
   switch (user?.role) {
     case 'admin':
@@ -58,7 +56,6 @@ export default function HomeScreen() {
       menuKeys = ['Agenda','Clientes','Servicios','Pedir Cita'];
       break;
     default:
-      // usuario normal
       menuKeys = ['Servicios','Pedir Cita'];
   }
 

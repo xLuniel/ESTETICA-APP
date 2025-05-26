@@ -15,10 +15,8 @@ export default function ResetPasswordScreen() {
       return;
     }
 
-    // Agregar logica para reestablecer contraseña
     setSuccess(true);
 
-    // Limpiar campos
     setEmail('');
     setNewPassword('');
   };

@@ -90,7 +90,6 @@ const RegistrarServicioScreen = () => {
       setServicios([...servicios, servicioConId]);
       setServicioRegistrado(servicioConId);
       Alert.alert('Éxito', `Servicio registrado con ID: ${id}`);
-      // Limpiar el formulario
       setDescripcion('');
       setPrecio('');
       setCategoria('');

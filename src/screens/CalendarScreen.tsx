@@ -6,7 +6,6 @@ import { Calendar } from 'react-native-calendars';
 const CalendarScreen = () => {
   const handleDayPress = (day: { dateString: string }) => {
     console.log('Selected day', day.dateString);
-    // Lógica para manejar la selección de una fecha
   };
 
   return (

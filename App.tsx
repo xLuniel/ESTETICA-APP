@@ -1,18 +1,18 @@
 // App.tsx
 import React from 'react';
-import 'react-native-gesture-handler';  // Asegúrate de importar esto primero
+import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
 
-// Contexto de autenticación
+
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { AppProvider } from "./src/context/AppContext";
 
 //Navegacion
-import AuthStack from './src/navigation/AuthStack';   // Stack para Login
+import AuthStack from './src/navigation/AuthStack';
 import MainNavigator from './src/navigation/MainNavigation';
 
-// Provider de React Native Paper
+
 import { Provider as PaperProvider } from 'react-native-paper';
 
 function RootNavigator() {
