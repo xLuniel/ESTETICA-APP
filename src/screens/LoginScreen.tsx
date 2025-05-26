@@ -1,5 +1,6 @@
 // src/screens/LoginScreen.tsx
 import React, { useState } from 'react';
+<<<<<<< Updated upstream
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
@@ -20,54 +21,40 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+=======
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { useAuth } from 'src/context/AuthContext';
 
-  const handleLogin = () => {
-    // Validación de campos
-    if (!email || !password) {
-      Alert.alert('Error', 'Por favor, ingresa correo y contraseña.');
-      return;
+export default function LoginScreen({ navigation }: any) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { signIn } = useAuth();
+>>>>>>> Stashed changes
+
+  const handleLogin = async () => {
+    try {
+      await signIn(email, password);
+      // La redirección a la pantalla correspondiente ya la controla App.tsx
+    } catch (error) {
+      Alert.alert('Error', 'Correo o contraseña incorrecta');
+      console.error(error);
     }
-
-    // Buscamos el usuario en nuestro objeto de prueba
-    const record = TEST_USERS[email.toLowerCase()];
-    if (!record || record.password !== password) {
-      Alert.alert('Credenciales inválidas', 'Verifica tu correo y contraseña.');
-      return;
-    }
-
-    // Si coincide, hacemos signIn con nombre, correo y rol
-    signIn({
-      name: email.split('@')[0], 
-      email,
-      role: record.role,
-    });
-
-    // Limpiar campos (opcional)
-    setEmail('');
-    setPassword('');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Iniciar Sesión</Text>
+      <Text style={styles.title}>Brushes</Text>
+      <Image source={require('../../assets/img1.png')} style={styles.image} />
+      <Text style={styles.subtitle}>Inicio de Sesión</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Correo electrónico"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={email}
-        onChangeText={setEmail}
-      />
+      <TextInput placeholder="Correo" style={styles.input} onChangeText={setEmail} value={email} />
+      <TextInput placeholder="Contraseña" secureTextEntry style={styles.input} onChangeText={setPassword} value={password} />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+      </TouchableOpacity>
 
+<<<<<<< Updated upstream
       <Button title="Ingresar" onPress={handleLogin} />
       
       {/* Instrucciones de prueba */}
@@ -81,11 +68,17 @@ export default function LoginScreen() {
       <View style={styles.footer}>
         <Text style={styles.bluext} onPress={() => navigation.navigate('Recuperar')}>¿Olvidaste tu contraseña?</Text>
       </View>
+=======
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.link}>Crear cuenta</Text>
+      </TouchableOpacity>
+>>>>>>> Stashed changes
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+<<<<<<< Updated upstream
   container: {
     flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#fff0f5'
   },
@@ -108,3 +101,14 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   }
 });
+=======
+  container: { padding: 24, alignItems: 'center', backgroundColor: '#f5f9fc', flex: 1 },
+  title: { fontSize: 32, fontWeight: 'bold', marginTop: 40 },
+  subtitle: { fontSize: 18, marginVertical: 20 },
+  input: { width: '100%', padding: 12, marginVertical: 8, borderWidth: 1, borderRadius: 8 },
+  button: { backgroundColor: '#3a4b57', padding: 14, borderRadius: 8, width: '100%', marginTop: 12 },
+  buttonText: { color: 'white', textAlign: 'center' },
+  link: { color: '#3a4b57', marginTop: 16 },
+  image: { width: 120, height: 120, marginVertical: 20 }
+});
+>>>>>>> Stashed changes
