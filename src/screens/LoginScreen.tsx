@@ -1,6 +1,7 @@
 // src/screens/LoginScreen.tsx
 import React, { useState } from 'react';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
@@ -31,6 +32,16 @@ export default function LoginScreen({ navigation }: any) {
   const { signIn } = useAuth();
 >>>>>>> Stashed changes
 
+=======
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
+import { useAuth } from 'src/context/AuthContext';
+
+export default function LoginScreen({ navigation }: any) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { signIn } = useAuth();
+
+>>>>>>> Stashed changes
   const handleLogin = async () => {
     try {
       await signIn(email, password);
@@ -55,6 +66,7 @@ export default function LoginScreen({ navigation }: any) {
       </TouchableOpacity>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <Button title="Ingresar" onPress={handleLogin} />
       
       {/* Instrucciones de prueba */}
@@ -73,11 +85,17 @@ export default function LoginScreen({ navigation }: any) {
         <Text style={styles.link}>Crear cuenta</Text>
       </TouchableOpacity>
 >>>>>>> Stashed changes
+=======
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.link}>Crear cuenta</Text>
+      </TouchableOpacity>
+>>>>>>> Stashed changes
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   container: {
     flex: 1, justifyContent: 'center', padding: 20, backgroundColor: '#fff0f5'
@@ -102,6 +120,8 @@ const styles = StyleSheet.create({
   }
 });
 =======
+=======
+>>>>>>> Stashed changes
   container: { padding: 24, alignItems: 'center', backgroundColor: '#f5f9fc', flex: 1 },
   title: { fontSize: 32, fontWeight: 'bold', marginTop: 40 },
   subtitle: { fontSize: 18, marginVertical: 20 },
@@ -110,5 +130,9 @@ const styles = StyleSheet.create({
   buttonText: { color: 'white', textAlign: 'center' },
   link: { color: '#3a4b57', marginTop: 16 },
   image: { width: 120, height: 120, marginVertical: 20 }
+<<<<<<< Updated upstream
+});
+>>>>>>> Stashed changes
+=======
 });
 >>>>>>> Stashed changes
