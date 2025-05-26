@@ -8,17 +8,9 @@ import { ActivityIndicator, View } from 'react-native';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { AppProvider } from "./src/context/AppContext";
 
-<<<<<<< Updated upstream
-// Pantallas
-import LoginScreen from './src/screens/LoginScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import CalendarScreen from './src/screens/CalendarScreen';
-import Recuperar from './src/screens/Recuperar';
-=======
 //Navegacion
 import AuthStack from './src/navigation/AuthStack';   // Stack para Login
 import MainNavigator from './src/navigation/MainNavigation';
->>>>>>> Stashed changes
 
 // Provider de React Native Paper
 import { Provider as PaperProvider } from 'react-native-paper';
